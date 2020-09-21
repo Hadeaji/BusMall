@@ -6,10 +6,11 @@ top: 20px;
 }
 
 header {
-    background-color: gray;
+    background-color: #202626;
     width: 100%;
     height: 110px;
-
+    position: sticky;
+    z-index: 5;
 }
 
 nav:first-child {
@@ -23,7 +24,7 @@ nav li {
     margin-right: 15px;
     width: 150px;
     height: 70px;
-    background-color: rgba(75, 9, 9, 0.61);
+    background-color: #59372F;
     color: white;
     display: inline-block;
     text-align: center;
@@ -32,7 +33,6 @@ nav li {
 }
 
 #mainImg {
-    margin-top: 25px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -45,6 +45,9 @@ nav li {
     margin-right: auto;
     width: 998px;
     margin-bottom: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 410px;
 
 }
 
@@ -100,7 +103,7 @@ button {float: left;
     width: 200px;
     height: 50px;
     color: white;
-    background-color: rgba(75, 9, 9, 0.61);
+    background-color: #59372F;
     font-size: medium;
     margin-top: 10px;
     transition-delay: 350ms;
@@ -109,12 +112,12 @@ button {float: left;
 }
 
 #backem {
-    background-image: url(../img/backem.png);
+    background-color: #50322a;
 }
 
 button:hover {
     color: black;
-    background-color: whitesmoke;
+    background-color: #BFA8A3;
 
 }
 #finalResult {
@@ -125,7 +128,7 @@ footer {
     display: block;
     width: 100%;
     height: 110px;
-    background-color: gray;
+    background-color: #202626;
     margin-top: 25px;
 }
 #consept {
@@ -133,7 +136,7 @@ footer {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    background-color: gainsboro;
+    background-color: #BFA8A3;
     padding: 10px;
 
 }
@@ -147,3 +150,13 @@ footer {
     font-size: large;
 }
  
+canvas {
+    width: 960px !important;
+    height: 450px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: none;
+
+}

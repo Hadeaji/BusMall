@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <header>
+    <div id="backem"><img id="mainImg" src="img/ds.png" alt="" width="Auto" height="550px"></div>
+    <header style="position:sticky;">
         <nav>
         
             <li>About Us</li>
@@ -18,7 +20,7 @@
         </nav>
     </header>
     <main>
-        <div id="backem"><img id="mainImg" src="img/Logo2.png" alt="" width="Auto" height="550px"></div>
+        
         <div><img id="mainImg" src="img/Building.jpg" alt="" width="960px" height="450px"></div>
 
         <div id="consept">
@@ -26,7 +28,7 @@
                 Plaase pick one till you no more can.
             </p>
         </div>
-
+        <canvas id="myChart"></canvas></div>
         <div id="sec">
             <img id="firstImage" width="300" height="375">
             <img id="SeconedImage" width="300" height="375">

@@ -6,7 +6,13 @@ var ThirdImage = document.getElementById('ThirdImage');
 var imagesDiv = document.getElementById('sec');
 var finalmessage = document.getElementById('finalResult');
 
+var nowadaysArray = [-1,-1,-1];
 var prodectsArray = [];
+
+var chartnames = [];
+var chartdisplay = [];
+var chartvotes = [];
+
 
 var currentFirstImage;
 var currentSeconedImage;
@@ -19,6 +25,7 @@ this.link = link;
 this.votes = 0;
 this.timesDisplayed = 0;
 prodectsArray.push(this);
+chartnames.push(this.prodectName);
 }
 
 new Product('Bag','img/bag.jpg');
@@ -48,17 +55,29 @@ function imageIndex(){
     var SeconedImageIndex;
     var ThirdImageIndex;
 
+    
+    
+    do{
     firstImageIndex = Math.floor((Math.random() * prodectsArray.length));
-  
+    }while(firstImageIndex === nowadaysArray[0] || firstImageIndex === nowadaysArray[1] || firstImageIndex === nowadaysArray[2]);
+
     do{
         SeconedImageIndex = Math.floor((Math.random() * prodectsArray.length));
-    } while(SeconedImageIndex === firstImageIndex);
+    } while(SeconedImageIndex === firstImageIndex || SeconedImageIndex === nowadaysArray[0] || SeconedImageIndex === nowadaysArray[1] || SeconedImageIndex === nowadaysArray[2]);
 
     do{
         ThirdImageIndex = Math.floor((Math.random() * prodectsArray.length));
-    } while(ThirdImageIndex === firstImageIndex || ThirdImageIndex === SeconedImageIndex);
+    } while(ThirdImageIndex === firstImageIndex || ThirdImageIndex === SeconedImageIndex || ThirdImageIndex === nowadaysArray[0] || ThirdImageIndex === nowadaysArray[1] || ThirdImageIndex === nowadaysArray[2]);
+
+    nowadaysArray = [];
+    nowadaysArray.push(firstImageIndex);
+    nowadaysArray.push(SeconedImageIndex);
+    nowadaysArray.push(ThirdImageIndex);
+
+
 
     displayImages(firstImageIndex,SeconedImageIndex,ThirdImageIndex);
+    
 }
 
 function displayImages(first, seconed, third){
@@ -90,7 +109,8 @@ function voicesOfTheCustomers(event){
     } else if(event.target.id === 'ThirdImage'){
         clickedImage = currentThirdImage;
 }
-
+    finalmessage.textContent = '';
+    displayResults();
 
     clickedImage.votes++;
     imageIndex();
@@ -98,9 +118,59 @@ function voicesOfTheCustomers(event){
 
     if(totalClicks >= 25){
         imagesDiv.removeEventListener('click',voicesOfTheCustomers);
-        displayResults();
+        // displayResults();
+
+         // chart info
+    chartdisplay = [];
+    chartvotes = [];
+    for(var i = 0; i < prodectsArray.length ; i++){
+        chartdisplay.push(prodectsArray[i].timesDisplayed);
+    }
+    for(var i = 0; i < prodectsArray.length ; i++){
+        chartvotes.push(prodectsArray[i].votes);
+    }
+    ///
+
+    // hide the 3 images
+    var myElement = document.querySelector("#sec");
+    myElement.style.display = "none";
+    //
+
+    // show the chart
+    var myElement = document.querySelector("#myChart");
+    myElement.style.display = "visible";
+    //
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: chartnames,
+        datasets: [{
+            label: 'Dispaly Times',
+            backgroundColor: '#F2A477',
+            borderColor: '#F2A477',
+            data: chartdisplay
+        },
+        {
+            label: 'Voting Times',
+            backgroundColor: '#59372F',
+            borderColor: '#59372F',
+            data: chartvotes
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+    //
     }
 
+   
 
 }
 
@@ -110,5 +180,9 @@ function displayResults(){
       listItem = document.createElement('li');
       listItem.textContent = 'Displayed Times for '+ prodectsArray[i].prodectName + ' is ' + prodectsArray[i].timesDisplayed + ' and votes are ' + prodectsArray[i].votes;
       finalmessage.appendChild(listItem);
+
+      
     }
+        
+    
 }

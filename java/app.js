@@ -5,9 +5,13 @@ var SeconedImage = document.getElementById('SeconedImage');
 var ThirdImage = document.getElementById('ThirdImage');
 var imagesDiv = document.getElementById('sec');
 var finalmessage = document.getElementById('finalResult');
+var buttom = document.getElementById('button1');
+
 
 var nowadaysArray = [-1,-1,-1];
 var prodectsArray = [];
+
+
 
 var chartnames = [];
 var chartdisplay = [];
@@ -19,13 +23,16 @@ var currentSeconedImage;
 var currentThirdImage;
 var totalClicks = 0;
 
+
+
 function Product (prodectName,link){
-this.prodectName = prodectName;
-this.link = link;
-this.votes = 0;
-this.timesDisplayed = 0;
-prodectsArray.push(this);
-chartnames.push(this.prodectName);
+        this.prodectName = prodectName;
+        this.link = link;
+        this.votes = 0;
+        this.timesDisplayed = 0;
+        prodectsArray.push(this);
+        chartnames.push(this.prodectName);
+
 }
 
 new Product('Bag','img/bag.jpg');
@@ -49,6 +56,12 @@ new Product('USB','img/usb.gif');
 new Product('Water-Can','img/water-can.jpg');
 new Product('Wine-Glass','img/wine-glass.jpg');
 
+
+
+if (localStorage.getItem('JSONproducts')){
+    prodectsArray = [];
+    prodectsArray = JSON.parse(localStorage.getItem('JSONproducts'));
+}
 
 function imageIndex(){
     var firstImageIndex;
@@ -119,6 +132,7 @@ function voicesOfTheCustomers(event){
     if(totalClicks >= 25){
         imagesDiv.removeEventListener('click',voicesOfTheCustomers);
         // displayResults();
+        localStorage.setItem('JSONproducts', JSON.stringify(prodectsArray));
 
          // chart info
     chartdisplay = [];
@@ -130,10 +144,14 @@ function voicesOfTheCustomers(event){
         chartvotes.push(prodectsArray[i].votes);
     }
     ///
+    
+
+
+
 
     // hide the 3 images
-    var myElement = document.querySelector("#sec");
-    myElement.style.display = "none";
+    var Element = document.querySelector("#sec");
+    Element.style.display = "none";
     //
 
     // show the chart
@@ -170,8 +188,6 @@ var chart = new Chart(ctx, {
     //
     }
 
-   
-
 }
 
 function displayResults(){
@@ -181,8 +197,17 @@ function displayResults(){
       listItem.textContent = 'Displayed Times for '+ prodectsArray[i].prodectName + ' is ' + prodectsArray[i].timesDisplayed + ' and votes are ' + prodectsArray[i].votes;
       finalmessage.appendChild(listItem);
 
-      
+
     }
         
-    
+
+}
+
+buttom.addEventListener('click',ahead)
+
+// buttom clears local
+function ahead(event){
+    if(event.target.id === 'button1'){
+        localStorage.clear();
+    }
 }

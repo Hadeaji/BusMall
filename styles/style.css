@@ -50,6 +50,9 @@ nav li {
     height: 410px;
 
 }
+body {
+    background-color: oldlace;
+}
 
 #sec img {
     display: inline-block;
